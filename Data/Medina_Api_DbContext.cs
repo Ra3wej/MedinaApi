@@ -61,6 +61,7 @@ namespace MedinaApi.Data
                 op.IsTemporal();
             });
         }
+        public DbSet<MedinaApi.Models.ChronicDiases> ChronicDiases { get; set; } = default!;
         //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         //{
         //    var currentTime = DateTime.Now;

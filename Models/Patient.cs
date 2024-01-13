@@ -5,10 +5,14 @@ namespace MedinaApi.Models
 {
     public class Patient
     {
+        public Patient()
+        {
+            PatientChronicDiases = new HashSet<PatientChronicDiases>();
+        }
 
         [Key]
         public int Id { get; set; }
-        public Guid GuidKey { get; set; }=Guid.NewGuid();
+        public Guid GuidKey { get; set; } = Guid.NewGuid();
         public string? NationalCardId { get; set; }
         public string? PassportId { get; set; }
         [Required]
@@ -17,7 +21,6 @@ namespace MedinaApi.Models
         public string SecondName { get; set; }
         [Required]
         public string ThirdName { get; set; }
-
         [Required]
         public string PhoneNumber { get; set; }
         public string? FamilyPhoneNumber { get; set; }
@@ -26,6 +29,7 @@ namespace MedinaApi.Models
         public byte Gender { get; set; }
         public bool IsActive { get; set; } = true;
         public bool Deceased { get; set; } = true;
-        public DateTime CreatedAt { get; set; }=DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public ICollection<PatientChronicDiases> PatientChronicDiases { get; set; }
     }
 }
