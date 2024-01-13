@@ -16,11 +16,11 @@ namespace MedinaApi.Helpers
         ///     var key = Convert.ToBase64String(hmac.Key);
         /// </summary>
 
-        public static string GenerateToken(int id, string role, string key,bool IsSuperUser)
+        public static string GenerateToken(Guid id, string role, string key,bool IsSuperUser,bool IsnormalUser)
         {
 
             var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
-           var lifetime = TimeSpan.FromHours(24);
+           var lifetime =IsnormalUser?TimeSpan.FromDays(300): TimeSpan.FromHours(24);
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {
