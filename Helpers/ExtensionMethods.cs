@@ -15,17 +15,5 @@ namespace MedinaApi.Helpers
             };
         }
 
-        public static string GetFileUrl(this HttpContext httpContext, string folderPath, string? fileName)
-        {
-            if (fileName?.Trim() == "" || fileName == null)
-            {
-                return "";
-            }
-            var Url = "" + httpContext.Request.Scheme.ToString() + "://" + httpContext.Request.Host.ToString() + "/" + "api" + "/" + "Files" + "/" + folderPath + "/" + fileName;
-            return Url;
-        }
-
-
-     
     }
 }

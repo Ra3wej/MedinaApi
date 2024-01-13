@@ -19,6 +19,7 @@ namespace MedinaApi.Data
         //public DbSet<FirebaseId> FirebaseId { get; set; }
         public virtual DbSet<DashboardUser> DashboardUsers { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
+        public virtual DbSet<Doctors> Doctors { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LanguageSet>(op =>
@@ -28,6 +29,12 @@ namespace MedinaApi.Data
                 op.HasIndex(p => p.Kurdish);
             });
             modelBuilder.Entity<Patient>(op =>
+            {
+                op.HasIndex(c => c.GuidKey).IsUnique();
+                op.HasIndex(c => c.NationalCardId).IsUnique();
+                op.HasIndex(c => c.PassportId).IsUnique();
+            });
+            modelBuilder.Entity<Doctors>(op =>
             {
                 op.HasIndex(c => c.GuidKey).IsUnique();
                 op.HasIndex(c => c.NationalCardId).IsUnique();
@@ -45,6 +52,11 @@ namespace MedinaApi.Data
             });
             
             modelBuilder.Entity<Patient>().ToTable(op =>
+            {
+                op.IsTemporal();
+            });
+
+            modelBuilder.Entity<Doctors>().ToTable(op =>
             {
                 op.IsTemporal();
             });

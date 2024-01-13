@@ -80,13 +80,6 @@ namespace MedinaApi.DTO
     //    public string? UserImage { get; set; }
 
     //}
-    public class VerifyUserDTO
-    {
-        public string PhoneNumber { get; set; }
-        public string? PassportId { get; set; }
-        public string? NationalCardId { get; set; }
-        public string OtpCode { get; set; }
-    }
     public class AddUserDTO { }
     public class DeleteUserDTO { }
     public class UpdateUserDTO
