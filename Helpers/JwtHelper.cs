@@ -59,14 +59,14 @@ namespace MedinaApi.Helpers
             return tokenHandler.WriteToken(token);
         }
 
-        public static int? GetUserId(this HttpContext httpContext)
+        public static Guid? GetUserId(this HttpContext httpContext)
         {
             string? a = httpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (a is null or "" or " ")
             {
                 return null;
             }
-            return int.Parse(a);
+            return Guid.Parse(a);
         }
          public static bool IsSuperUser(this HttpContext httpContext)
         {
