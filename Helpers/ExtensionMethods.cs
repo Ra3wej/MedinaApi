@@ -26,9 +26,6 @@ namespace MedinaApi.Helpers
         }
 
 
-        public static bool ValidateImageUploadResult(this ImageUploadDTO uploaded)
-        {
-            return uploaded is { Name: not "" and not null, WasEmpty: false, Uploaded: true };
-        }
+     
     }
 }

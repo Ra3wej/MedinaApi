@@ -37,6 +37,27 @@ namespace MedinaApi.Helpers
 
             return tokenHandler.WriteToken(token);
         }
+        public static string GenerateToken(int id, string role, string key, bool IsSuperUser, bool IsnormalUser)
+        {
+
+            var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+            var lifetime = IsnormalUser ? TimeSpan.FromDays(300) : TimeSpan.FromHours(24);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new List<Claim>()
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, id.ToString() ),
+                            new Claim(ClaimTypes.Role, role),
+                            new ("isSuperUser", IsSuperUser.ToString())
+                        }),
+                Expires = DateTime.Now.Add(lifetime),
+                SigningCredentials = new SigningCredentials(mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
+        }
 
         public static int? GetUserId(this HttpContext httpContext)
         {

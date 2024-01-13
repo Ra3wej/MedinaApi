@@ -26,7 +26,7 @@ namespace MedinaApi.Controllers
         [Route("[Action]")]
         // [Authorize]
         [AllowAnonymous]
-        public IActionResult LogIn([FromBody] DashboardUserLogInDTO usersDTO)
+        public async Task<ActionResult<DashboardUserLogInReturnDTO>> LogIn([FromBody] DashboardUserLogInDTO usersDTO)
         {
 
             if (!ModelState.IsValid)
@@ -49,30 +49,22 @@ namespace MedinaApi.Controllers
 
             if (_passwordHasher.VerifyPassword(usersDTO.Password, user.Password, user.Salt))
             {
-                return Ok(new
+                return Ok(new DashboardUserLogInReturnDTO
                 {
-                    Username = user.UserName,
-                    Token = JwtHelper.GenerateToken(id: user.Id, StaticTokenRole.Admin, _configuration.GetValue<string>("Jwt:Key"), IsSuperUser: user.IsSuperUser),
+                    UserName = user.UserName,
+                    Token = JwtHelper.GenerateToken(id: user.Id, StaticTokenRole.Admin, _configuration.GetValue<string>("Jwt:Key"), IsSuperUser: true,IsnormalUser:false),
                 });
             }
             else
             {
               return BadRequest("username or password is wrong");
             }
-            //    if (username==null) { 
-            //    return NotFound();
-            //    }
-            //    return Ok(new
-            //{   a=username,
-            //    V = 123,
-            //    d = JwtManager.GenerateToken(username: "ad"),
-            //});
         }
 
         [HttpPost]
         [Route("[Action]")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> SignUp([FromBody] DashboardUserSignUpDTO usersDTO)
+        public async Task<ActionResult<DashboardUserLogInReturnDTO>> SignUp([FromBody] DashboardUserSignUpDTO usersDTO)
         {
             if (!HttpContext.IsSuperUser())
             {
@@ -110,11 +102,10 @@ namespace MedinaApi.Controllers
             await _context.DashboardUsers.AddAsync(NewUser);
             await _context.SaveChangesAsync();
 
-            return Ok(new
+            return Ok(new DashboardUserLogInReturnDTO
             {
-                userName = usersDTO.UserName,
-                Token = JwtHelper.GenerateToken(id: NewUser.Id, StaticTokenRole.Admin, _configuration.GetValue<string>("Jwt:Key"), IsSuperUser: NewUser.IsSuperUser),
-                ImageUrl = "https://i.pinimg.com/564x/55/14/32/5514321d87da3de324cbf95350c6aade.jpg"
+                UserName = usersDTO.UserName,
+                Token = JwtHelper.GenerateToken(id: NewUser.Id, StaticTokenRole.Admin, _configuration.GetValue<string>("Jwt:Key"), IsSuperUser: true,IsnormalUser:false),
             });
         }
 
@@ -173,30 +164,5 @@ namespace MedinaApi.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> UploadDashboardUserImage([FromForm] IFormFile file) {
-
-        //    var userId = JwtHelper.GetUserId(HttpContext);
-        //    var res =await FileHelper.Upload(HttpContext, Statics.DashboardUserImages);
-
-        //    try
-        //    {
-        //        var dashboardImage = new DashboardUserImage
-        //        {
-        //            DashboardUserId = userId,
-        //            FileName = res.Name
-        //        };
-        //       await _context.DashboardUserImages.AddAsync(dashboardImage);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        FileHelper.DeleteFile(res.Name,Statics.DashboardUserImages);
-
-        //        throw;
-        //    }
-        //    return Ok("Uploaded.");
-        //}
-
     }
 }

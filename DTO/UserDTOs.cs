@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace VaryApi.DTO
+namespace MedinaApi.DTO
 {
     public class UserLogInDto
     {
@@ -40,7 +40,6 @@ namespace VaryApi.DTO
         [JsonRequired]
         public byte Gender { get; set; }
         [JsonRequired]
-        public bool IsActive { get; set; }
         public string? FamilyPhoneNumber { get; set; }
     }
 
@@ -55,10 +54,11 @@ namespace VaryApi.DTO
 
         public string PhoneNumber { get; set; }
         public string CountryCode { get; set; } = "+964";
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public byte Gender { get; set; }
         public bool IsActive { get; set; }
         public bool Deceased { get; set; }
+        public DateTime CreatedAt { get; set; }
 
     }
     //public class GetNormalUserDTO {
@@ -97,12 +97,12 @@ namespace VaryApi.DTO
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string ThirdName { get; set; }
-
         public string PhoneNumber { get; set; }
         public string CountryCode { get; set; }
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public byte Gender { get; set; }
         public bool IsActive { get; set; }
         public bool Deceased { get; set; }
+        public string? FamilyPhoneNumber { get; set; }
     }
 }
