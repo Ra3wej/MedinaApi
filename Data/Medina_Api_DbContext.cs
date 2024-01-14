@@ -20,6 +20,8 @@ namespace MedinaApi.Data
         public virtual DbSet<DashboardUser> DashboardUsers { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Doctors> Doctors { get; set; }
+        public DbSet<MedinaApi.Models.ChronicDiases> ChronicDiases { get; set; } = default!;
+        public DbSet<MedinaApi.Models.Hospital> Hospital { get; set; } = default!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LanguageSet>(op =>
@@ -61,7 +63,6 @@ namespace MedinaApi.Data
                 op.IsTemporal();
             });
         }
-        public DbSet<MedinaApi.Models.ChronicDiases> ChronicDiases { get; set; } = default!;
         //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         //{
         //    var currentTime = DateTime.Now;
