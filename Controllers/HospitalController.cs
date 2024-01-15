@@ -1,6 +1,7 @@
 ﻿using MedinaApi.Data;
 using MedinaApi.DTO;
 using MedinaApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,7 @@ namespace MedinaApi.Controllers
         // PUT: api/Hospital/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
+        [Authorize(Roles ="admin")]
         public async Task<IActionResult> PutHospital(UpdateHospitalDto updateHospitalDto)
         {
 
@@ -73,6 +75,7 @@ namespace MedinaApi.Controllers
         // POST: api/Hospital
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles ="admin")]
         public async Task<ActionResult<Hospital>> PostHospital(AddHospitalDto Hospital)
         {
             if (_context.Hospital == null)
