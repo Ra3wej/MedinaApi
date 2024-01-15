@@ -22,6 +22,8 @@ namespace MedinaApi.Data
         public virtual DbSet<Doctors> Doctors { get; set; }
         public DbSet<MedinaApi.Models.ChronicDiases> ChronicDiases { get; set; } = default!;
         public DbSet<MedinaApi.Models.Hospital> Hospital { get; set; } = default!;
+        public DbSet<MedinaApi.Models.PatientDoctorVisits> PatientDoctorVisits { get; set; } = default!;
+        public DbSet<MedinaApi.Models.PatientChronicDiases> PatientChronicDiases { get; set; } = default!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LanguageSet>(op =>
