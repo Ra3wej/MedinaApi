@@ -36,7 +36,7 @@ namespace MedinaApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChronicDiases");
+                    b.ToTable("ChronicDiases", (string)null);
                 });
 
             modelBuilder.Entity("MedinaApi.Models.DashboardUser", b =>
@@ -77,7 +77,7 @@ namespace MedinaApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DashboardUsers");
+                    b.ToTable("DashboardUsers", (string)null);
                 });
 
             modelBuilder.Entity("MedinaApi.Models.Doctors", b =>
@@ -147,7 +147,7 @@ namespace MedinaApi.Migrations
                         .IsUnique()
                         .HasFilter("[PassportId] IS NOT NULL");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
@@ -175,7 +175,7 @@ namespace MedinaApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hospital");
+                    b.ToTable("Hospital", (string)null);
                 });
 
             modelBuilder.Entity("MedinaApi.Models.LanguageSet", b =>
@@ -219,7 +219,7 @@ namespace MedinaApi.Migrations
 
                     b.HasIndex("Kurdish");
 
-                    b.ToTable("LanguageSets");
+                    b.ToTable("LanguageSets", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
@@ -311,7 +311,7 @@ namespace MedinaApi.Migrations
                         .IsUnique()
                         .HasFilter("[PassportId] IS NOT NULL");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                             {
@@ -345,7 +345,7 @@ namespace MedinaApi.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PatientChronicDiases");
+                    b.ToTable("PatientChronicDiases", (string)null);
                 });
 
             modelBuilder.Entity("MedinaApi.Models.PatientDoctorVisits", b =>
@@ -376,7 +376,7 @@ namespace MedinaApi.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PatientDoctorVisits");
+                    b.ToTable("PatientDoctorVisits", (string)null);
                 });
 
             modelBuilder.Entity("MedinaApi.Models.PatientResults", b =>
@@ -401,7 +401,7 @@ namespace MedinaApi.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PatientResults");
+                    b.ToTable("PatientResults", (string)null);
                 });
 
             modelBuilder.Entity("MedinaApi.Models.PatientChronicDiases", b =>
