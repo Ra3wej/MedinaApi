@@ -66,6 +66,7 @@ namespace MedinaApi.Data
             });
         }
         public DbSet<MedinaApi.Models.PatientResults> PatientResults { get; set; } = default!;
+        public DbSet<MedinaApi.Models.RecentTreatments> RecentTreatments { get; set; } = default!;
         //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         //{
         //    var currentTime = DateTime.Now;
